@@ -2,11 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-RATINGS = [('1',1),('2',2),('3',3),('4',4),('5',5)]
+RATINGS = [(1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5')]
 
 
 class Company(models.Model):
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class Review(models.Model):
@@ -17,3 +20,6 @@ class Review(models.Model):
     submission_date = models.DateTimeField(auto_now_add=True)
     company = models.ForeignKey(Company, related_name='reviews', on_delete=models.SET_NULL, null=True)
     created_by = models.ForeignKey(User, related_name='reviews', on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.title
