@@ -15,7 +15,7 @@ class Company(models.Model):
 class Review(models.Model):
     title = models.CharField(max_length=64)
     summary = models.TextField(max_length=10000)
-    ratings = models.IntegerField(choices=RATINGS)
+    rating = models.IntegerField(choices=RATINGS)
     ip_addr = models.CharField(max_length=39, blank=True)
     submission_date = models.DateTimeField(auto_now_add=True)
     company = models.ForeignKey(Company, related_name='reviews', on_delete=models.SET_NULL, null=True)
