@@ -9,17 +9,23 @@ from .permissions import IsOwnerOrSuperUser
 
 class CompanyList(generics.ListAPIView):
     queryset = Company.objects.all()
-    serializer_class =  CompanySerializer
     permission_classes = (permissions.IsAuthenticated,)
+
+    def get_serializer_class(self):
+        if self.request.version == 'v1':
+            return CompanySerializer
 
 
 class ReviewList(generics.ListCreateAPIView):
-    serializer_class = ReviewSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         user = self.request.user
         return Review.objects.filter(created_by=user)
+
+    def get_serializer_class(self):
+        if self.request.version == 'v1':
+            return ReviewSerializer
 
     def perform_create(self, serializer):
         ip_addr = get_client_ip_addr(self.request)
@@ -28,5 +34,8 @@ class ReviewList(generics.ListCreateAPIView):
 
 class ReviewDetails(generics.RetrieveAPIView):
     queryset = Review.objects.all()
-    serializer_class = ReviewSerializer
     permission_classes = (permissions.IsAuthenticated, IsOwnerOrSuperUser)
+
+    def get_serializer_class(self):
+        if self.request.version == 'v1':
+            return ReviewSerializer
