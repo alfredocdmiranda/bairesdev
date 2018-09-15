@@ -6,6 +6,7 @@ from .models import *
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = Company
+        fields = '__all__'
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -14,3 +15,4 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
+        fields = '__all__'
