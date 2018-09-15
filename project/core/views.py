@@ -7,6 +7,12 @@ from .helpers import get_client_ip_addr
 from .permissions import IsOwnerOrSuperUser
 
 
+class CompanyList(generics.ListAPIView):
+    queryset = Company.objects.all()
+    serializer_class =  CompanySerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+
 class ReviewList(generics.ListCreateAPIView):
     serializer_class = ReviewSerializer
     permission_classes = (permissions.IsAuthenticated,)
