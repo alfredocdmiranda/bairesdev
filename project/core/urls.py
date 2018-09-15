@@ -5,9 +5,6 @@ from rest_framework import routers
 
 from . import views
 
-router_v1 = routers.DefaultRouter()
-
-
 urlpatterns = [
-    url(r'^api/v1', include(router_v1.urls))
+    url(r'^api/reviews/$', views.ReviewList.as_view()),
 ]
