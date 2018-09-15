@@ -12,6 +12,6 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 
 @receiver(pre_save, sender=settings.AUTH_USER_MODEL)
-def create_random_password(sender, instance=None, created=False, **kwargs):
-    if instance and not instance.pk:
+def disable_password(sender, instance=None, created=False, **kwargs):
+    if instance and not instance.pk and not instance.is_superuser:
         instance.set_unusable_password()
