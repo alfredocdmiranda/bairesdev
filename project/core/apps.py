@@ -1,5 +1,8 @@
 from django.apps import AppConfig
 
 
-class CustomerConfig(AppConfig):
-    name = 'core'
+class MyAppConfig(AppConfig):
+    name = 'project.core'
+
+    def ready(self):
+        import project.core.signals

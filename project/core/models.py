@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -19,7 +20,7 @@ class Review(models.Model):
     ip_addr = models.CharField(max_length=39, blank=True)
     submission_date = models.DateTimeField(auto_now_add=True)
     company = models.ForeignKey(Company, related_name='reviews', on_delete=models.SET_NULL, null=True)
-    created_by = models.ForeignKey(User, related_name='reviews', on_delete=models.SET_NULL, null=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='reviews', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.title
