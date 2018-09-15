@@ -12,7 +12,7 @@ class CompanySerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     company = CompanySerializer(read_only=True)
     company_id = serializers.PrimaryKeyRelatedField(source='company', queryset=Company.objects.all(), )
-    created_by = serializers.CharField()
+    created_by = serializers.CharField(required=False)
 
     class Meta:
         model = Review
